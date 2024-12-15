@@ -49,4 +49,6 @@ def check_number(mobile_number):
         return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    # Use the PORT environment variable set by Render
+    port = int(os.getenv("PORT", 5000))  # Defaults to 5000 if PORT is not set
+    app.run(host="0.0.0.0", port=port)
