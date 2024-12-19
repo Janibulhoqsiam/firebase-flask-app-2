@@ -2,10 +2,11 @@ import os
 from flask import Flask, request, jsonify
 import firebase_admin
 from firebase_admin import credentials, db
+from flask_cors import CORS
 
 # Initialize Flask app
 app = Flask(__name__)
-
+CORS(app, resources={r"/store_number": {"origins": "https://app.onecompiler.com"}})
 # Initialize Firebase Admin SDK
 cred = credentials.Certificate("/etc/secrets/serviceAccountKey.json")
 firebase_admin.initialize_app(cred, {
