@@ -16,7 +16,7 @@ def add_cors_headers(response):
 
 
 
-CORS(app, resources={r"/store_number*": {"origins": "*"}})
+CORS(app, resources={r"/store_number/*": {"origins": "https://arjun-win-method.kesug.com"}})
 
 # Initialize Firebase Admin SDK
 cred = credentials.Certificate("/etc/secrets/serviceAccountKey.json")
