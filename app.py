@@ -6,6 +6,16 @@ from flask_cors import CORS
 
 # Initialize Flask app
 app = Flask(__name__)
+
+@app.after_request
+def add_cors_headers(response):
+    response.headers['Access-Control-Allow-Origin'] = 'https://arjun-win-method.kesug.com'  # Replace with your actual origin
+    response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+    response.headers['Access-Control-Allow-Methods'] = 'POST, OPTIONS'  # Allow POST and preflight OPTIONS requests
+    return response
+
+
+
 CORS(app, resources={r"/store_number*": {"origins": "*"}})
 
 # Initialize Firebase Admin SDK
