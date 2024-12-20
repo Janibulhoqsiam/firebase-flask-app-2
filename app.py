@@ -19,8 +19,7 @@ firebase_admin.initialize_app(cred, {
 firebase_ref = db.reference("mobile_numbers")
 
 # Endpoint to store a mobile number
-@app.route("/store_number", methods=["POST"])
-@cross_origin(origins="https://example.com")  
+@app.route("/store_number/", methods=["POST"])
 def store_number():
     try:
         data = request.get_json()
