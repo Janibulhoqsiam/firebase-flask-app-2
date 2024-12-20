@@ -6,7 +6,7 @@ from flask_cors import CORS
 
 # Initialize Flask app
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": ["https://onecompiler.com/", "https://arjun-win-method.kesug.com"]}})
+CORS(app, resources={r"/store_number*": {"origins": ["https://app.onecompiler.com/", "https://arjun-win-method.kesug.com/2024/12/15/register-and-enjoy-arjun-win-hack/"]}})
 
 # Initialize Firebase Admin SDK
 cred = credentials.Certificate("/etc/secrets/serviceAccountKey.json")
