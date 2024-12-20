@@ -7,16 +7,7 @@ from flask_cors import CORS
 # Initialize Flask app
 app = Flask(__name__)
 
-@app.after_request
-def add_cors_headers(response):
-    response.headers['Access-Control-Allow-Origin'] = 'https://arjun-win-method.kesug.com'  # Replace with your actual origin
-    response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
-    response.headers['Access-Control-Allow-Methods'] = 'POST, OPTIONS'  # Allow POST and preflight OPTIONS requests
-    return response
-
-
-
-CORS(app, resources={r"/store_number/*": {"origins": "https://arjun-win-method.kesug.com"}})
+CORS(app)
 
 # Initialize Firebase Admin SDK
 cred = credentials.Certificate("/etc/secrets/serviceAccountKey.json")
@@ -29,6 +20,7 @@ firebase_ref = db.reference("mobile_numbers")
 
 # Endpoint to store a mobile number
 @app.route("/store_number", methods=["POST"])
+@cross_origin(origins="https://example.com")  
 def store_number():
     try:
         data = request.get_json()
