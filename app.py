@@ -6,9 +6,9 @@ from flask_cors import CORS
 
 # Initialize Flask app
 app = Flask(__name__)
-CORS(app, resources={r"/store_number": {"origins": "https://arjun-win-method.kesug.com"}})
+CORS(app)
 # Initialize Firebase Admin SDK
-cred = credentials.Certificate("/etc/secrets/serviceAccountKey.json")
+cred = credentials.Certificate("serviceAccountKey.json")
 firebase_admin.initialize_app(cred, {
     "databaseURL": "https://winhackverify-default-rtdb.firebaseio.com"  # Replace with your Firebase database URL
 })
@@ -50,7 +50,12 @@ def check_number(mobile_number):
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+
+@app.route('/', methods=['GET'])
+def working():
+    return "Working", 200        
+
 if __name__ == "__main__":
     # Use the PORT environment variable set by Render
     port = int(os.getenv("PORT", 5000))  # Defaults to 5000 if PORT is not set
-    app.run(host="0.0.0.0", port=port)
+    app.run(host="0.0.0.0", port=5000)
