@@ -6,9 +6,10 @@ from flask_cors import CORS
 
 # Initialize Flask app
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": ["https://onecompiler.com/", "https://arjun-win-method.kesug.com"]}})
+
 # Initialize Firebase Admin SDK
-cred = credentials.Certificate("serviceAccountKey.json")
+cred = credentials.Certificate("/etc/secrets/serviceAccountKey.json")
 firebase_admin.initialize_app(cred, {
     "databaseURL": "https://winhackverify-default-rtdb.firebaseio.com"  # Replace with your Firebase database URL
 })
@@ -58,4 +59,4 @@ def working():
 if __name__ == "__main__":
     # Use the PORT environment variable set by Render
     port = int(os.getenv("PORT", 5000))  # Defaults to 5000 if PORT is not set
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=port)
