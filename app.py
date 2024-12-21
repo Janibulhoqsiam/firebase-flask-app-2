@@ -113,7 +113,7 @@ def api_data():
                 "AppVersion": 1,
                 "working_link": "https://diuwin.bet",
                 "start": 1,
-                "login_url": "https://firebase-flask-app-1.onrender.com/diuwin2.0/login.php?number=",
+                "login_url": "https://firebase-flask-app-2.onrender.com/diuwin2.0/login.php?number=",
                 "register_url": "https://pesagyan.com/diuwin2.0/register.php?number=",
                 "appName": "Diuwin Manish"
             }
