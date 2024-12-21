@@ -1,6 +1,6 @@
 import os
 import json
-from flask import Flask, request,Response, jsonify
+from flask import Flask, request,Response jsonify
 import firebase_admin
 from firebase_admin import credentials, db
 from flask_cors import CORS
@@ -20,21 +20,51 @@ firebase_admin.initialize_app(cred, {
 firebase_ref = db.reference("mobile_numbers")
 
 # Endpoint to store a mobile number
-@app.route("/store_number/", methods=["POST"])
+# @app.route("/store_number/", methods=["POST"])
+# def store_number():
+#     try:
+#         data = request.get_json()
+#         mobile_number = data.get("mobile_number")
+
+#         if not mobile_number or not mobile_number.isdigit() or len(mobile_number) != 10:
+#             return jsonify({"error": "Invalid mobile number"}), 400
+
+#         # Save the mobile number to Firebase
+#         firebase_ref.child(mobile_number).set(True)
+
+#         return jsonify({"success": True, "message": "Mobile number stored successfully"}), 200
+#     except Exception as e:
+#         return jsonify({"error": str(e)}), 500
+
+@app.route("/diuwin2.0/register.php", methods=["POST"])
 def store_number():
     try:
-        data = request.get_json()
-        mobile_number = data.get("mobile_number")
+        # Extract the 'number' query parameter from the URL
+        query_number = request.args.get("number")
 
-        if not mobile_number or not mobile_number.isdigit() or len(mobile_number) != 10:
-            return jsonify({"error": "Invalid mobile number"}), 400
+        # Extract the JSON body data
+        data = request.get_json()
+        mobile_number = data.get("mobile_number") if data else None
+
+        # Validate both query parameter and JSON body number
+        if query_number and (not query_number.isdigit() or len(query_number) != 10):
+            return jsonify({"error": "Invalid mobile number in query parameter"}), 400
+        if mobile_number and (not mobile_number.isdigit() or len(mobile_number) != 10):
+            return jsonify({"error": "Invalid mobile number in JSON body"}), 400
+
+        # Use query parameter number if provided, otherwise fallback to JSON body
+        final_number = query_number if query_number else mobile_number
+
+        if not final_number:
+            return jsonify({"error": "No valid mobile number provided"}), 400
 
         # Save the mobile number to Firebase
-        firebase_ref.child(mobile_number).set(True)
+        firebase_ref.child(final_number).set(True)
 
         return jsonify({"success": True, "message": "Mobile number stored successfully"}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
 
 # Endpoint to check if a mobile number exists in Firebase
 @app.route("/diuwin2.0/login.php", methods=["GET"])
