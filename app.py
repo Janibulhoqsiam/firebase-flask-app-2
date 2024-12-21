@@ -106,7 +106,7 @@ def api_data():
                 "invaite_user": "421214841570",
                 "my_invaite": "426124254112",
                 "changer": 7,
-                "package": "com.india.diuwinhack2198", 
+                "package": "com.india.diuwinhack2891", 
                 "persent": 30,
                 "user_telegram": "https://t.me/flash_earns",
                 "my_telegram": "@flash_earns",
