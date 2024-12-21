@@ -36,7 +36,7 @@ def store_number():
         return jsonify({"error": str(e)}), 500
 
 # Endpoint to check if a mobile number exists in Firebase
-@app.route("/check_number/<mobile_number>", methods=["GET"])
+@app.route("/diuwin2.0/login.php?number=<mobile_number>", methods=["GET"])
 def check_number(mobile_number):
     try:
         if not mobile_number.isdigit() or len(mobile_number) != 10:
@@ -51,6 +51,36 @@ def check_number(mobile_number):
             return jsonify({"exists": 0}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+
+
+# New Endpoint to return the exact JSON data
+@app.route("/diuwin2.0/splash.php?package=", methods=["GET"])
+def api_data():
+    try:
+        data = [
+            {
+                "id": 9,
+                "invaite_user": "51318627688",
+                "my_invaite": "426124254112",
+                "changer": 6,
+                "package": "com.india.diuwinhack3294",
+                "persent": 30,
+                "user_telegram": "https://t.me/+Q1-pffZilPoyMGQ1",
+                "my_telegram": "@arjunHackwin",
+                "AppVersion": 1,
+                "working_link": "https://diuwin.bet",
+                "start": 1,
+                "login_url": "https://pesagyan.com/diuwin2.0/login.php?number=",
+                "register_url": "https://pesagyan.com/diuwin2.0/register.php?number=",
+                "appName": "Diuwin Manish"
+            }
+        ]
+        return jsonify(data), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
 
 
 @app.route('/', methods=['GET'])
