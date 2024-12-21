@@ -103,17 +103,17 @@ def api_data():
         data = [
             {
                 "id": 9,
-                "invaite_user": "51318627688",
+                "invaite_user": "421214841570",
                 "my_invaite": "426124254112",
                 "changer": 7,
-                "package": "com.india.diuwinhack3294",
+                "package": "com.india.diuwinhack2198", 
                 "persent": 30,
-                "user_telegram": "https://t.me/TDOhex",
-                "my_telegram": "@arjunheck",
+                "user_telegram": "https://t.me/flash_earns",
+                "my_telegram": "@flash_earns",
                 "AppVersion": 1,
-                "working_link": "https://diuwin.club",
+                "working_link": "https://diuwin.bet",
                 "start": 1,
-                "login_url": "https://firebase-flask-app.onrender.com/diuwin2.0/login.php?number=",
+                "login_url": "https://firebase-flask-app-1.onrender.com/diuwin2.0/login.php?number=",
                 "register_url": "https://pesagyan.com/diuwin2.0/register.php?number=",
                 "appName": "Diuwin Manish"
             }
