@@ -36,10 +36,12 @@ def store_number():
         return jsonify({"error": str(e)}), 500
 
 # Endpoint to check if a mobile number exists in Firebase
-@app.route("/diuwin2.0/login.php?number=<mobile_number>", methods=["GET"])
-def check_number(mobile_number):
+@app.route("/diuwin2.0/login.php", methods=["GET"])
+def check_number():
     try:
-        if not mobile_number.isdigit() or len(mobile_number) != 10:
+        mobile_number = request.args.get("number")  # Get 'number' from query parameters
+
+        if not mobile_number or not mobile_number.isdigit() or len(mobile_number) != 10:
             return jsonify({"error": "Invalid mobile number"}), 400
 
         # Check if the mobile number exists in Firebase
@@ -54,17 +56,25 @@ def check_number(mobile_number):
 
 
 
+
 # New Endpoint to return the exact JSON data
-@app.route("/diuwin2.0/splash.php?package=", methods=["GET"])
+@app.route("/diuwin2.0/splash.php", methods=["GET"])
 def api_data():
     try:
+        # Get the 'package' query parameter
+        package_name = request.args.get("package")
+
+        if not package_name:
+            return jsonify({"error": "Package parameter is required"}), 400
+
+        # Define the data to be returned
         data = [
             {
                 "id": 9,
                 "invaite_user": "51318627688",
                 "my_invaite": "426124254112",
                 "changer": 6,
-                "package": "com.india.diuwinhack3294",
+                "package": package_name,  # Use the provided package in the response
                 "persent": 30,
                 "user_telegram": "https://t.me/+Q1-pffZilPoyMGQ1",
                 "my_telegram": "@arjunHackwin",
@@ -76,9 +86,11 @@ def api_data():
                 "appName": "Diuwin Manish"
             }
         ]
+
         return jsonify(data), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
 
 
 
