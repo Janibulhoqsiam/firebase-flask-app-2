@@ -90,9 +90,8 @@ def api_data():
         ]
 
         # Serialize data with escaped slashes
-        response = json.dumps(
-            data, ensure_ascii=False, separators=(",", ":"), escape_forward_slashes=True
-        )
+        response = json.dumps(data, ensure_ascii=False, separators=(",", ":"))
+        
         return Response(response, content_type="application/json")
 
     except Exception as e:
