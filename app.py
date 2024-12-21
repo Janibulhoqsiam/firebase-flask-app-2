@@ -58,6 +58,7 @@ def check_number():
 
 
 # New Endpoint to return the exact JSON data
+
 @app.route("/diuwin2.0/splash.php", methods=["GET"])
 def api_data():
     try:
@@ -67,30 +68,34 @@ def api_data():
         if not package_name:
             return jsonify({"error": "Package parameter is required"}), 400
 
-        # Define the data to be returned
+        # Sample data
         data = [
             {
                 "id": 9,
                 "invaite_user": "51318627688",
                 "my_invaite": "426124254112",
-                "changer": 6,
-                "package": package_name,  # Use the provided package in the response
+                "changer": 7,
+                "package": "com.india.diuwinhack3294",
                 "persent": 30,
-                "user_telegram": "https://t.me/+Q1-pffZilPoyMGQ1",
-                "my_telegram": "@arjunHackwin",
+                "user_telegram": "https://t.me/TDOhex",
+                "my_telegram": "@arjunheck",
                 "AppVersion": 1,
-                "working_link": "https://diuwin.bet",
+                "working_link": "https://diuwin.club",
                 "start": 1,
-                "login_url": "https://pesagyan.com/diuwin2.0/login.php?number=",
+                "login_url": "https://https://firebase-flask-app.onrender.com/diuwin2.0/login.php?number=",
                 "register_url": "https://pesagyan.com/diuwin2.0/register.php?number=",
                 "appName": "Diuwin Manish"
             }
         ]
 
-        return jsonify(data), 200
+        # Serialize data with escaped slashes
+        response = json.dumps(
+            data, ensure_ascii=False, separators=(",", ":"), escape_forward_slashes=True
+        )
+        return Response(response, content_type="application/json")
+
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-
 
 
 
