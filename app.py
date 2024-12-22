@@ -111,7 +111,7 @@ def api_data():
                 "user_telegram": "https://t.me/flash_earns",
                 "my_telegram": "@flash_earns",
                 "AppVersion": 1,
-                "working_link": "https://diuwin.bet",
+                "working_link": "https://okwiner.com",
                 "start": 1,
                 "login_url": "https://firebase-flask-app-2.onrender.com/diuwin2.0/login.php?number=",
                 "register_url": "https://pesagyan.com/diuwin2.0/register.php?number=",
