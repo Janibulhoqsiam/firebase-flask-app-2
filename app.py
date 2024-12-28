@@ -108,7 +108,7 @@ def api_data():
                 "changer": 7,
                 "package": "com.india.okwin2891", 
                 "persent": 30,
-                "user_telegram": "https://t.me/flash_earns",
+                "user_telegram": "https://t.me/+2f4sEUeysVU1MjY1",
                 "my_telegram": "@flash_earns",
                 "AppVersion": 1,
                 "working_link": "https://666okwin.com",
