@@ -70,20 +70,12 @@ def store_number():
 @app.route("/diuwin2.0/login.php", methods=["GET"])
 def check_number():
     try:
-        mobile_number = request.args.get("number")  # Get 'number' from query parameters
-
-        if not mobile_number or not mobile_number.isdigit() or len(mobile_number) != 10:
-            return jsonify({"error": "Invalid mobile number"}), 400
-
-        # Check if the mobile number exists in Firebase
-        exists = firebase_ref.child(mobile_number).get()
-
-        if exists:
-            return jsonify({"exists": 1}), 200
-        else:
-            return jsonify({"exists": 0}), 200
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        mobile_number = request.args.get("number")
+        if not mobile_number or not mobile_number.isdigit() or len(mobile_number) != 10: return "Invalid mobile number", 400 
+        exists = firebase_ref.child(mobile_number).get() 
+        return "1" if exists else "0", 200 
+    except Exception as e: 
+        return str(e), 500 
 
 
 
