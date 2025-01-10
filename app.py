@@ -11,13 +11,15 @@ app = Flask(__name__)
 CORS(app)
 
 # Initialize Firebase Admin SDK
-cred = credentials.Certificate("/etc/secrets/serviceAccountKey.json")
+cred = credentials.Certificate("C:\\Users\\WALTON\\serviceAccountKey.json")
 firebase_admin.initialize_app(cred, {
     "databaseURL": "https://winhackverify-default-rtdb.firebaseio.com"  # Replace with your Firebase database URL
 })
 
 # Reference to the Firebase Realtime Database
 firebase_ref = db.reference("mobile_numbers")
+
+firebase_ref_dp = db.reference("deposit_amount")
 
 
 
@@ -75,7 +77,7 @@ def store_deposit():
             return jsonify({"error": "Invalid deposit amount"}), 400
 
         # Store the deposit amount in Firebase under a fixed key
-        firebase_ref.child("deposit_amount").set(int(deposit_amount))
+        firebase_ref_dp.child("deposit_amount").set(int(deposit_amount))
 
         return jsonify({"success": True, "message": "Deposit amount stored successfully"}), 200
     except Exception as e:
@@ -96,7 +98,7 @@ def api_data():
 
 
         # Fetch the deposit amount from Firebase
-        deposit_amount = firebase_ref.child("deposit_amount").get()
+        deposit_amount = firebase_ref_dp.child("deposit_amount").get()
         if not deposit_amount:
             deposit_amount = 0  # Default value if no deposit amount is stored
 
