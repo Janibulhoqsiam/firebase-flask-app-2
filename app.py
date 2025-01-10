@@ -19,22 +19,7 @@ firebase_admin.initialize_app(cred, {
 # Reference to the Firebase Realtime Database
 firebase_ref = db.reference("mobile_numbers")
 
-# Endpoint to store a mobile number
-# @app.route("/store_number/", methods=["POST"])
-# def store_number():
-#     try:
-#         data = request.get_json()
-#         mobile_number = data.get("mobile_number")
 
-#         if not mobile_number or not mobile_number.isdigit() or len(mobile_number) != 10:
-#             return jsonify({"error": "Invalid mobile number"}), 400
-
-#         # Save the mobile number to Firebase
-#         firebase_ref.child(mobile_number).set(True)
-
-#         return jsonify({"success": True, "message": "Mobile number stored successfully"}), 200
-#     except Exception as e:
-#         return jsonify({"error": str(e)}), 500
 
 @app.route("/diuwin2.0/register.php", methods=["POST"])
 def store_number():
@@ -79,6 +64,24 @@ def check_number():
 
 
 
+@app.route("/diuwin2.0/deposit.php", methods=["POST"])
+def store_deposit():
+    try:
+        # Extract the deposit amount from the query parameters
+        deposit_amount = request.args.get("amount")
+
+        # Validate the deposit amount
+        if not deposit_amount or not deposit_amount.isdigit() or int(deposit_amount) <= 0:
+            return jsonify({"error": "Invalid deposit amount"}), 400
+
+        # Store the deposit amount in Firebase under a fixed key
+        firebase_ref.child("deposit_amount").set(int(deposit_amount))
+
+        return jsonify({"success": True, "message": "Deposit amount stored successfully"}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
 
 # New Endpoint to return the exact JSON data
 
@@ -91,13 +94,20 @@ def api_data():
         if not package_name:
             return jsonify({"error": "Package parameter is required"}), 400
 
+
+        # Fetch the deposit amount from Firebase
+        deposit_amount = firebase_ref.child("deposit_amount").get()
+        if not deposit_amount:
+            deposit_amount = 0  # Default value if no deposit amount is stored
+
+
         # Sample data
         data = [
             {
                 "id": 9,
                 "invaite_user": "517857385862",
                 "my_invaite": "41165552976",
-                "changer": 7,
+                "changer": deposit_amount,
                 "package": "com.india.okwin2891", 
                 "persent": 30,
                 "user_telegram": "https://t.me/+2f4sEUeysVU1MjY1",
