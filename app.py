@@ -73,7 +73,7 @@ def store_deposit():
         deposit_amount = request.args.get("amount")
 
         # Validate the deposit amount
-        if not deposit_amount or not deposit_amount.isdigit() or int(deposit_amount) <= 0:
+        if not deposit_amount or not deposit_amount.isdigit() :
             return jsonify({"error": "Invalid deposit amount"}), 400
 
         # Store the deposit amount in Firebase under a fixed key
