@@ -111,7 +111,7 @@ def api_data():
                 "my_invaite": "41165552976",
                 "changer": deposit_amount,
                 "package": "com.india.okwin2891", 
-                "persent": 30,
+                "persent": 100,
                 "user_telegram": "https://t.me/+2f4sEUeysVU1MjY1",
                 "my_telegram": "@flash_earns",
                 "AppVersion": 1,
