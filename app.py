@@ -109,7 +109,7 @@ def api_data():
                 "id": 9,
                 "invaite_user": "517857385862",
                 "my_invaite": "41165552976",
-                "changer": deposit_amount,
+                "changer": 7,
                 "package": "com.india.okwin2891", 
                 "persent": 100,
                 "user_telegram": "https://t.me/+2f4sEUeysVU1MjY1",
