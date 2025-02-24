@@ -65,21 +65,32 @@ def check_number():
         return str(e), 500 
 
 
-
 @app.route("/diuwin2.0/deposit.php", methods=["POST"])
 def store_deposit():
     try:
         # Extract the deposit amount from the query parameters
         deposit_amount = request.args.get("amount")
 
-        # Validate the deposit amount
-        if not deposit_amount or not deposit_amount.isdigit() :
+        if not deposit_amount:
+            return jsonify({"error": "Deposit amount is required"}), 400
+
+        # Try converting to a float
+        try:
+            deposit_amount = float(deposit_amount)
+        except ValueError:
             return jsonify({"error": "Invalid deposit amount"}), 400
 
-        # Store the deposit amount in Firebase under a fixed key
-        firebase_ref_dp.child("deposit_amount").set(int(deposit_amount))
+        # Truncate to integer part
+        integer_part = int(deposit_amount)  # This will ignore the fractional part
+        
+        # Validate that the deposit amount is positive
+        if integer_part < 0:
+            return jsonify({"error": "Deposit amount must be positive"}), 400
 
-        return jsonify({"success": True, "message": "Deposit amount stored successfully"}), 200
+        # Store the integer part of the deposit amount in Firebase under a fixed key
+        firebase_ref_dp.child("deposit_amount").set(integer_part)
+
+        return jsonify({"success": True, "message": f"Deposit amount stored successfully: {integer_part}"}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
